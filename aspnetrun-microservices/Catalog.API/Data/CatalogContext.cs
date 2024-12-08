@@ -10,7 +10,10 @@ namespace Catalog.API.Data
         public CatalogContext(IMongoDatabase database, IConfiguration configuration)
         {
             var collectionName = configuration.GetValue<string>("DatabaseSettings:CollectionName");
+            
             Products = database.GetCollection<Product>(collectionName);
+
+            CatalogContextSeed.Seed(Products);
         }
     }
 }

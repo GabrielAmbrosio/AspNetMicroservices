@@ -8,6 +8,7 @@ namespace Catalog.API.Controllers
     [Route("apirecipe/[controller]")]
     public class CatalogController : ControllerBase
     {
+        //add versioning
         [HttpGet]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -17,10 +18,8 @@ namespace Catalog.API.Controllers
         {
             var products = await productRepository.GetProducts();
 
-            if (products == null)
-                return NotFound(); 
-
-            return Ok(products);
+            //add error
+            return products == null ? NotFound() : Ok(products);
         }
     }
 }

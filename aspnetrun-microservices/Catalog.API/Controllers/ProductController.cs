@@ -9,7 +9,7 @@ namespace Catalog.API.Controllers
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CatalogController : ControllerBase
+    public class ProductController : ControllerBase
     {
         [HttpGet]
         [MapToApiVersion("1.0")]
@@ -24,7 +24,7 @@ namespace Catalog.API.Controllers
             return products == null ? NotFound() : Ok(products);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [MapToApiVersion("1.0")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -37,7 +37,7 @@ namespace Catalog.API.Controllers
             return product == null ? NotFound() : Ok(product);
         }
 
-        [HttpGet]
+        [HttpGet("{category}")]
         [MapToApiVersion("1.0")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -50,7 +50,7 @@ namespace Catalog.API.Controllers
             return products == null ? NotFound() : Ok(products);
         }
 
-        [HttpGet]
+        [HttpGet("{name}")]
         [MapToApiVersion("1.0")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -69,7 +69,7 @@ namespace Catalog.API.Controllers
         [Produces("application/json")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Product>> AddProduct([FromBody] ProductDto productDto , [FromServices] IProductRepository productRepository, [FromServices] IMapper mapper)
+        public async Task<ActionResult<Product>> AddProduct([FromBody] ProductDto productDto, [FromServices] IProductRepository productRepository, [FromServices] IMapper mapper)
         {
 
             var mappedProduct = mapper.Map<Product>(productDto);
@@ -80,7 +80,7 @@ namespace Catalog.API.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
         [Consumes("application/json")]
         [Produces("application/json")]

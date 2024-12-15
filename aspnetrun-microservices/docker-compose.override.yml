@@ -17,5 +17,22 @@ services:
     depends_on:
       - catalogdb
 
+  basketdb:
+    container_name: basket.db
+    restart: always
+    ports: 
+      - "6379:6379"
+
+  basket.api:
+    container_name: basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=basketdb:6379"
+      - ASPNETCORE_URLS=http://+:8081
+    ports:
+      - "8081:8081"
+    depends_on:
+      - basketdb
+
   
 

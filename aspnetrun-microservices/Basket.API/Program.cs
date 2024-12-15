@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddRedis();
+builder.Services.AddRedis(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddCors();
 
